@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        #canvas {
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        select {
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Upload and Resize Image</h2>
+    <div class="container">
+        <input type="file" id="upload" accept="image/*" />
+        <select id="size">
+            <option value="500">500x500</option>
+            <option value="400">400x400</option>
+            <option value="300">300x300</option>
+            <option value="200">200x200</option>
+            <option value="100">100x100</option>
+        </select>
+        <button id="download" style="display:none;">Download as PNG</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
