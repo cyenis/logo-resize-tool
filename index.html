@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Resizer</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Image Resizer and Rotator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,6 +19,7 @@
 
         .container {
             margin: 20px;
+            text-align: center;
         }
 
         #canvas {
@@ -23,30 +27,23 @@
             margin-top: 20px;
         }
 
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
+        button,
+        input,
         select {
+            margin-top: 10px;
             padding: 10px;
-            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <h2>Upload and Resize Image</h2>
+    <h2>Upload, Resize, and Rotate Image</h2>
     <div class="container">
-        <input type="file" id="upload" accept="image/*" />
-        <select id="size">
-            <option value="500">500x500</option>
-            <option value="400">400x400</option>
-            <option value="300">300x300</option>
-            <option value="200">200x200</option>
-            <option value="100">100x100</option>
-        </select>
+        <input type="file" id="upload" accept="image/*" /><br>
+        <label for="maxDim">Maximum Dimension (px):</label>
+        <input type="number" id="maxDim" value="500" /><br>
+        <label for="minDim">Minimum Dimension (px):</label>
+        <input type="number" id="minDim" value="500" /><br>
         <button id="download" style="display:none;">Download as PNG</button>
         <canvas id="canvas" style="display:none;"></canvas>
     </div>

@@ -4,40 +4,27 @@ document.getElementById('upload').addEventListener('change', function(event) {
     reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
-            // Calculate the scaling factor and new dimensions
-            let originalWidth = img.width;
-            let originalHeight = img.height;
-            let newWidth, newHeight;
-            const maxDim = 500;
+            // Fetch the maximum dimension from user input
+            const maxDim = parseInt(document.getElementById('maxDim').value, 10) || 500;
+            const minDim = parseInt(document.getElementById('minDim').value, 10) || 500; // This value is currently not used in resizing
 
-            if (originalWidth > originalHeight) {
-                // If the image is wider than it is tall
-                const ratio = originalHeight / originalWidth;
-                newWidth = maxDim;
-                newHeight = maxDim * ratio;
-            } else {
-                // If the image is taller than it is wide or square
-                const ratio = originalWidth / originalHeight;
-                newHeight = maxDim;
-                newWidth = maxDim * ratio;
-            }
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
 
-            // Adjust for images where width is the smaller dimension
-            if (originalWidth < originalHeight) {
-                newWidth = Math.round(maxDim * (originalWidth / originalHeight));
-                newHeight = maxDim;
-            } else { // For images where height is the smaller dimension or if square
-                newHeight = Math.round(maxDim * (originalHeight / originalWidth));
-                newWidth = maxDim;
-            }
+            let width = img.width;
+            let height = img.height;
+
+            // Calculate the scaling factor to maintain aspect ratio
+            const scalingFactor = Math.min(maxDim / width, maxDim / height);
+            width = width * scalingFactor;
+            height = height * scalingFactor;
 
             // Resize the canvas to the new dimensions
-            const canvas = document.getElementById('canvas');
-            canvas.width = newWidth;
-            canvas.height = newHeight;
+            canvas.width = width;
+            canvas.height = height;
 
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, newWidth, newHeight); // Draw the resized image
+            // Draw the resized image
+            ctx.drawImage(img, 0, 0, width, height);
 
             // Show the canvas and download button
             canvas.style.display = 'block';
